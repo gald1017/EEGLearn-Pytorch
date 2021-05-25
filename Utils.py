@@ -57,7 +57,29 @@ class EEGImagesDataset(Dataset):
     def __getitem__(self, idx):
         if torch.is_tensor(idx):
             idx = idx.tolist()
+            
         image = self.Images[idx]
+        label = self.label[idx]
+        sample = (image, label)
+        
+        return sample
+    
+    
+class EEGImagesDataset_time(Dataset):
+    """EEGLearn Images Dataset from EEG."""
+    
+    def __init__(self, label, image):
+        self.label = label
+        self.Images = image
+        
+    def __len__(self):
+        return len(self.label)
+    
+    def __getitem__(self, idx):
+        if torch.is_tensor(idx):
+            idx = idx.tolist()
+            
+        image = self.Images[:,idx,:,:,:]
         label = self.label[idx]
         sample = (image, label)
         
@@ -130,7 +152,7 @@ def TrainTest_Model(model, trainloader, testloader, n_epoch=30, opti='SGD', lear
         print('Finished Training \n loss: %.3f\tAccuracy : %.3f\t\tval-loss: %.3f\tval-Accuracy : %.3f' %
                  (running_loss, running_acc, validation_loss,validation_acc))
     
-    return (running_loss, running_acc, validation_loss,validation_acc)
+    return (model,running_loss, running_acc, validation_loss,validation_acc)
 
 
 

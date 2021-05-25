@@ -12,9 +12,9 @@ jupyter-client==6.0.0
 jupyter-core==4.6.3
 kiwisolver==1.1.0
 matplotlib==3.2.0
-mkl-fft==1.0.15
-mkl-random==1.1.0
-mkl-service==2.3.0
+#mkl-fft==1.0.15
+#mkl-random==1.1.0
+#mkl-service==2.3.0
 numpy==1.17.3
 olefile==0.46
 pandas==1.0.1
